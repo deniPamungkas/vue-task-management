@@ -21,7 +21,8 @@ const formData = {
     title: '',
     description: '',
     priority: '',
-    status: 'not started'
+    status: 'not started',
+    done: false
 }
 
 const addSubTask = () => {

@@ -50,5 +50,20 @@ export const useTaskStore = defineStore("task", () => {
       return task.id == taskId;
     });
   };
-  return { task, deleteTask, addTask, deleteSubTask, addSubTask, checkSubTask };
+
+  const doneTask = (taskId) => {
+    const doneTask = task.value.filter((task) => {
+      return task.id == taskId;
+    });
+    doneTask[0].done = true;
+  };
+  return {
+    task,
+    deleteTask,
+    addTask,
+    deleteSubTask,
+    addSubTask,
+    checkSubTask,
+    doneTask,
+  };
 });

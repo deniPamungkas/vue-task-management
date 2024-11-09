@@ -6,7 +6,6 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogTrigger } from '@/components/ui/dialog';
 import { useTaskStore } from '@/store/taskStore';
 import { CirclePlus } from 'lucide-vue-next';
-import { ref } from 'vue';
 
 const taskStore = useTaskStore()
 
@@ -29,7 +28,7 @@ const taskStore = useTaskStore()
             </nav>
             <div class="h-full rounded-lg grid grid-cols-3 gap-3">
                 <TaskCard v-for="task of taskStore.task" :title="task.title" :description="task.description"
-                    :subtask="task.subtask" :status="task.status" :task-id="task.id" />
+                    :subtask="task.subtask" :status="task.status" :task-id="task.id" :done="task.done" />
             </div>
         </div>
     </section>
