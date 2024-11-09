@@ -3,7 +3,6 @@ import { ref } from "vue";
 export const useTaskStore = defineStore("task", () => {
   const task = ref([]);
   const deleteTask = (e) => {
-    // console.log(e);
     const deletedTask = task.value.filter((task) => {
       return task.id == e;
     });
@@ -30,10 +29,26 @@ export const useTaskStore = defineStore("task", () => {
     );
   };
 
+  const checkSubTask = (subtaskId, taskId) => {
+    const taskIdOfCheckedSubTask = task.value.filter((task) => {
+      return task.id == taskId;
+    });
+    const checkedSubtask = taskIdOfCheckedSubTask[0].subtask.filter(
+      (subtask) => {
+        return subtask.id == subtaskId;
+      },
+    );
+    if (checkedSubtask[0].checked) {
+      checkedSubtask[0].checked = false;
+    } else {
+      checkedSubtask[0].checked = true;
+    }
+  };
+
   const addSubTask = (taskId) => {
     const taskIdWhereNewSubTaskAdded = task.value.filter((task) => {
       return task.id == taskId;
     });
   };
-  return { task, deleteTask, addTask, deleteSubTask, addSubTask };
+  return { task, deleteTask, addTask, deleteSubTask, addSubTask, checkSubTask };
 });

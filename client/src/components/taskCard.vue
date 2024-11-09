@@ -7,6 +7,8 @@ import { ref } from 'vue';
 import { Button } from './ui/button';
 import { useTaskStore } from '@/store/taskStore';
 import { watch } from 'vue';
+import { AlertDialog, AlertDialogTrigger } from './ui/alert-dialog';
+import CustomAlertDialog from './customAlertDialog.vue';
 
 const props = defineProps({
     title: String,
@@ -35,6 +37,10 @@ const handleDeleteSubTask = (subtaskId) => {
     taskStore.deleteSubTask(subtaskId, props.taskId)
 }
 
+const handleCheckSubTask = (subtaskId) => {
+    taskStore.checkSubTask(subtaskId, props.taskId)
+}
+
 </script>
 <template>
     <div class="max-h-min p-3 rounded-lg bg-gray-800 border-gray-700 border-2 flex flex-col gap-3">
@@ -52,9 +58,6 @@ const handleDeleteSubTask = (subtaskId) => {
                         <DropdownMenuLabel>Options</DropdownMenuLabel>
                         <DropdownMenuSeparator />
                         <DropdownMenuGroup>
-                            <DropdownMenuItem class="data-[highlighted]:bg-gray-700 data-[highlighted]:text-white">
-                                <span>New sub task</span>
-                            </DropdownMenuItem>
                             <DropdownMenuSub>
                                 <DropdownMenuSubTrigger
                                     class="data-[highlighted]:bg-gray-700 data-[highlighted]:text-white data-[state=open]:bg-gray-700">
@@ -77,20 +80,6 @@ const handleDeleteSubTask = (subtaskId) => {
                                     </DropdownMenuSubContent>
                                 </DropdownMenuPortal>
                             </DropdownMenuSub>
-                            <DropdownMenuItem class="data-[highlighted]:bg-gray-700 data-[highlighted]:text-white">
-                                <span>Settings</span>
-                                <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
-                            </DropdownMenuItem>
-                            <DropdownMenuItem class="data-[highlighted]:bg-gray-700 data-[highlighted]:text-white">
-                                <span>Keyboard shortcuts</span>
-                                <DropdownMenuShortcut>⌘K</DropdownMenuShortcut>
-                            </DropdownMenuItem>
-                        </DropdownMenuGroup>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuGroup>
-                            <DropdownMenuItem class="data-[highlighted]:bg-gray-700 data-[highlighted]:text-white">
-                                <span>Team</span>
-                            </DropdownMenuItem>
                         </DropdownMenuGroup>
                     </DropdownMenuContent>
                 </DropdownMenu>
@@ -107,7 +96,7 @@ const handleDeleteSubTask = (subtaskId) => {
         <Collapsible v-if="props.subtask.length != 0" v-model:open="isOpen" class="w-full text-white space-y-2">
             <div class="flex items-center justify-between ">
                 <h4 class="text-sm font-semibold">
-                    SUB-TASKS
+                    SUB-TASKS : {{ props.subtask.length }}
                 </h4>
                 <CollapsibleTrigger as-child>
                     <Button variant="ghost" size="sm" class="w-9 p-0 hover:bg-gray-700 hover:text-white">
@@ -119,9 +108,9 @@ const handleDeleteSubTask = (subtaskId) => {
             <CollapsibleContent class="space-y-2">
                 <div v-for="subtask of props.subtask"
                     class="rounded-md px-2 h-[50px] bg-gray-700 text-sm flex justify-between items-center">
-                    <span class="text-[11px]">{{ subtask.value }}</span>
+                    <span class="text-[11px]" :class="subtask.checked ? 'line-through' : ''">{{ subtask.value }}</span>
                     <div class="flex justify-center items-center gap-2">
-                        <Button variant="ghost" class="p-0 hover:bg-gray-800">
+                        <Button variant="ghost" class="p-0 hover:bg-gray-800" @click="handleCheckSubTask(subtask.id)">
                             <CircleCheckBig :size="16" class="text-green-600" />
                         </Button>
                         <Button variant="ghost" class="p-0 hover:bg-gray-800" @click="handleDeleteSubTask(subtask.id)">
@@ -141,13 +130,18 @@ const handleDeleteSubTask = (subtaskId) => {
         <Separator />
         <div class="w-full h-[30px] flex justify-between items-center">
             <div class="h-full flex justify-center items-center gap-x-3">
-                <div class="h-full w-[30px] flex justify-center items-center hover:bg-gray-900 rounded-full"
-                    @click="handleDeleteTask">
-                    <CircleX class="text-red-600" size="20px" />
-                </div>
-                <div class="h-full w-[30px] flex justify-center items-center hover:bg-gray-900 rounded-full">
+                <AlertDialog>
+                    <AlertDialogTrigger as-child>
+                        <Button variant="ghost"
+                            class="h-full w-[30px] flex justify-center items-center hover:bg-gray-900 rounded-full">
+                            <CircleX class=" text-red-600" size="20px" />
+                        </Button>
+                    </AlertDialogTrigger>
+                    <CustomAlertDialog :handle-delete-task="handleDeleteTask" />
+                </AlertDialog>
+                <!-- <div class="h-full w-[30px] flex justify-center items-center hover:bg-gray-900 rounded-full">
                     <Pencil class="text-yellow-600" size="18px" />
-                </div>
+                </div> -->
             </div>
             <div class="h-full w-[30px] flex justify-center items-center hover:bg-gray-900 rounded-full">
                 <Check class="text-green-600" size="20px" />
