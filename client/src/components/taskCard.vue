@@ -52,8 +52,8 @@ const handleDoneTask = () => {
         :class="props.done ? 'bg-green-400' : 'bg-gray-800'">
         <div class="w-full flex">
             <div class="w-full">
-                <h3 class="font-bold text-sm text-white">{{ props.title }}</h3>
-                <p class="text-xs text-slate-100">{{ props.description }}</p>
+                <h3 class="font-bold text-xs md:text-sm text-white">{{ props.title }}</h3>
+                <p class="text-[10px] md:text-xs text-slate-100">{{ props.description }}</p>
             </div>
             <div class="flex flex-col justify-start items-start text-white hover:bg-gray-900 h-[20px] rounded-sm">
                 <DropdownMenu>
@@ -101,7 +101,7 @@ const handleDoneTask = () => {
         </div> -->
         <Collapsible v-if="props.subtask.length != 0" v-model:open="isOpen" class="w-full text-white space-y-2">
             <div class="flex items-center justify-between ">
-                <h4 class="text-sm font-semibold">
+                <h4 class="text-xs md:text-sm font-semibold">
                     SUB-TASKS : {{ props.subtask.length }}
                 </h4>
                 <CollapsibleTrigger as-child>
@@ -113,8 +113,9 @@ const handleDoneTask = () => {
             </div>
             <CollapsibleContent class="space-y-2">
                 <div v-for="subtask of props.subtask"
-                    class="rounded-md px-2 h-[50px] bg-gray-700 text-sm flex justify-between items-center">
-                    <span class="text-[11px]" :class="subtask.checked ? 'line-through' : ''">{{ subtask.value }}</span>
+                    class="rounded-md px-2 h-[50px] bg-gray-700 text-xs md:text-sm flex justify-between items-center">
+                    <span class="text-[9px] md:text-[11px]" :class="subtask.checked ? 'line-through' : ''">{{
+                        subtask.value }}</span>
                     <div class="flex justify-center items-center gap-2">
                         <Button variant="ghost" class="p-0 hover:bg-gray-800" @click="handleCheckSubTask(subtask.id)">
                             <CircleCheckBig :size="16" class="text-green-600" />
@@ -128,7 +129,7 @@ const handleDoneTask = () => {
         </Collapsible>
         <Separator />
         <div class="w-full flex justify-between items-center">
-            <div class="h-[36px] bg-gradient-to-r px-4 rounded-full text-xs font-semibold text-white flex justify-between items-center gap-3"
+            <div class="h-[36px] bg-gradient-to-r px-4 rounded-full text-[10px] md:text-xs font-semibold text-white flex justify-between items-center gap-3"
                 :class="props.status == 'not started' ? 'from-slate-600 to-slate-500' : props.status == 'on progress' ? 'from-yellow-600 to-yellow-500' : 'from-green-600 to-green-500'">
                 <span>{{ props.status }}</span>
             </div>

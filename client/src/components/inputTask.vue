@@ -48,20 +48,16 @@ const handleSubmit = async () => {
 
 }
 
-watch(subTasks, () => {
-    console.log(subTasks.value)
-})
-
 </script>
 <template>
-    <DialogContent class="sm:max-w-[425px] md:max-w-[600px] bg-gray-800 text-white">
+    <DialogContent class="max-w-[300px] sm:max-w-[425px] md:max-w-[600px] bg-gray-800 text-white">
         <DialogHeader>
             <DialogTitle>New Task</DialogTitle>
-            <DialogDescription class="text-slate-200">
+            <DialogDescription class="text-slate-200 ">
                 Make changes to your profile here. Click save when you're done.
             </DialogDescription>
         </DialogHeader>
-        <form action="" @submit.prevent="handleSubmit">
+        <form action="" @submit.prevent="handleSubmit" class="flex flex-col gap-y-5">
             <div class="flex flex-col gap-4">
                 <div class="flex flex-col gap-2">
                     <Label for="name" class="text-left">
@@ -97,7 +93,7 @@ watch(subTasks, () => {
                         Priority
                     </Label>
                     <Select v-model="formData.priority" required>
-                        <SelectTrigger class="w-[130px] bg-gray-700">
+                        <SelectTrigger class="w-[100px] md:w-[130px] bg-gray-700">
                             <SelectValue placeholder="Priority" />
                         </SelectTrigger>
                         <SelectContent class="bg-gray-700 text-white">

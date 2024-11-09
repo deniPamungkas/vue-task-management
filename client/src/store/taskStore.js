@@ -1,7 +1,12 @@
 import { defineStore } from "pinia";
-import { ref } from "vue";
+import { ref, watch } from "vue";
 export const useTaskStore = defineStore("task", () => {
-  const task = ref([]);
+  const task = ref(JSON.parse(window.localStorage.getItem("task")) || []);
+
+  watch(task.value, () => {
+    window.localStorage.setItem("task", JSON.stringify(task.value));
+  });
+
   const deleteTask = (e) => {
     const deletedTask = task.value.filter((task) => {
       return task.id == e;

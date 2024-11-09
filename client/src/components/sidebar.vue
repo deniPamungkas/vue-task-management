@@ -4,7 +4,7 @@ import { ChevronRight } from 'lucide-vue-next';
 
 </script>
 <template>
-    <section class="border-2 border-gray-700 h-[100vh] rounded-lg p-2 flex flex-col justify-between">
+    <section class="border-2 border-gray-700 h-[100vh] rounded-lg p-2 md:flex flex-col justify-between hidden">
         <div class="w-full h-[60px] rounded-lg bg-gray-800 flex items-center justify-start text-white p-5">
             <h1 class="text-2xl font-semibold">Tabs</h1>
         </div>
