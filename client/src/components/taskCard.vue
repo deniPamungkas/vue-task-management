@@ -48,7 +48,7 @@ const handleDoneTask = () => {
 
 </script>
 <template>
-    <div class="max-h-min p-3 rounded-lg border-gray-700 border-2 flex flex-col gap-3"
+    <div class="max-h-min break-inside-avoid p-3 rounded-lg border-gray-700 border-2 flex flex-col gap-3 transition-all duration-1000"
         :class="props.done ? 'bg-green-400' : 'bg-gray-800'">
         <div class="w-full flex">
             <div class="w-full">

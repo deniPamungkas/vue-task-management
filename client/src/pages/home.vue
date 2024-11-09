@@ -12,7 +12,7 @@ const taskStore = useTaskStore()
 
 </script>
 <template>
-    <section class="p-3 grid grid-cols-1 md:grid-cols-4 gap-3 h-[100vh]">
+    <section class="p-3 grid grid-cols-1 md:grid-cols-4 gap-3 min-h-min">
         <Sidebar />
         <div class="flex flex-col gap-y-2 md:col-span-3">
             <nav class="h-[50px] bg-gray-700 rounded-lg flex justify-between items-center px-3">
@@ -26,7 +26,7 @@ const taskStore = useTaskStore()
                     <InputTask />
                 </Dialog>
             </nav>
-            <div class="h-full rounded-lg grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            <div class="rounded-lg columns-1 md:columns-2 lg:columns-3 space-y-5 transition-all duration-1000">
                 <TaskCard v-for="task of taskStore.task" :title="task.title" :description="task.description"
                     :subtask="task.subtask" :status="task.status" :task-id="task.id" :done="task.done" />
             </div>
