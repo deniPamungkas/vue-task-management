@@ -13,12 +13,14 @@ const actionHandler = computed(() => {
 
 </script>
 <template>
-    <AlertDialogContent class="bg-gray-800 text-white font-delius">
+    <AlertDialogContent class="w-[300px] bg-gray-800 text-white font-delius">
         <AlertDialogHeader>
-            <AlertDialogTitle v-if="props.handleDeleteTask">Are you absolutely sure to delete this task?
+            <AlertDialogTitle v-if="props.handleDeleteTask" class="text-sm md:text-base">Are you absolutely sure to
+                delete this task?
             </AlertDialogTitle>
-            <AlertDialogTitle v-else>Are you absolutely sure to mark this task to done task?</AlertDialogTitle>
-            <AlertDialogDescription v-if="props.handleDeleteTask">
+            <AlertDialogTitle v-else class="text-xs md:text-sm">Are you absolutely sure to mark this task to done
+                task?</AlertDialogTitle>
+            <AlertDialogDescription v-if="props.handleDeleteTask" class="text-xs md:text-sm">
                 Delete cannot be undone. This will permanently delete your
                 task.
             </AlertDialogDescription>
@@ -27,8 +29,8 @@ const actionHandler = computed(() => {
             </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-            <AlertDialogCancel class="text-black">Cancel</AlertDialogCancel>
-            <AlertDialogAction @click="actionHandler">Continue</AlertDialogAction>
+            <AlertDialogCancel class="text-black text-xs md:text-sm">Cancel</AlertDialogCancel>
+            <AlertDialogAction @click="actionHandler" class="text-xs md:text-sm">Continue</AlertDialogAction>
         </AlertDialogFooter>
     </AlertDialogContent>
 </template>
