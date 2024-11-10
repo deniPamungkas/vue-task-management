@@ -69,8 +69,8 @@ const handleDoneTask = () => {
         :class="props.priority == 'urgent' ? 'bg-red-950' : props.priority == 'medium' ? 'bg-yellow-950' : 'bg-blue-950'">
         <div class="w-full flex">
             <div class="w-full">
-                <h3 class="font-bold text-xs md:text-sm text-white">{{ props.title }}</h3>
-                <p class="text-[10px] md:text-xs text-slate-100">{{ props.description }}</p>
+                <h3 class="font-bold text-sm md:text-base text-white">{{ props.title }}</h3>
+                <p class="text-xs md:text-sm text-slate-100">{{ props.description }}</p>
             </div>
             <div class="flex flex-col justify-start items-start text-white hover:bg-gray-900 h-[20px] rounded-sm">
                 <DropdownMenu>
@@ -118,9 +118,9 @@ const handleDoneTask = () => {
         </div> -->
         <Collapsible v-if="props.subtask.length != 0" v-model:open="isOpen" class="w-full text-white space-y-2">
             <div class="flex items-center justify-between ">
-                <h4 class="text-xs md:text-sm font-semibold">
+                <span class="text-xs md:text-sm font-semibold">
                     SUB-TASKS : {{ props.subtask.length }}
-                </h4>
+                </span>
                 <CollapsibleTrigger as-child>
                     <Button variant="ghost" size="sm" class="w-9 p-0 hover:bg-gray-700 hover:text-white">
                         <ChevronsUpDown class="h-4 w-4" />
@@ -130,8 +130,8 @@ const handleDoneTask = () => {
             </div>
             <CollapsibleContent class="space-y-2">
                 <div v-for="subtask of props.subtask"
-                    class="rounded-md px-2 h-[50px] bg-gray-700 text-xs md:text-sm flex justify-between items-center">
-                    <span class="text-[9px] md:text-[11px]" :class="subtask.checked ? 'line-through italic' : ''">{{
+                    class="rounded-md px-3 h-[35px] md:h-[40px] bg-gray-700 text-xs md:text-sm flex justify-between items-center">
+                    <span class="text-xs md:text-sm" :class="subtask.checked ? 'line-through italic' : ''">{{
                         subtask.value }}</span>
                     <div class="flex justify-center items-center gap-2">
                         <Button variant="ghost" class="p-0 hover:bg-gray-800" @click="handleCheckSubTask(subtask.id)">
