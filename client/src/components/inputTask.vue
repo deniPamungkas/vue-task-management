@@ -102,7 +102,7 @@ const handleSubmit = async () => {
                         <SelectTrigger class="w-[100px] md:w-[130px] bg-gray-700 text-xs md:text-sm">
                             <SelectValue placeholder="Priority" />
                         </SelectTrigger>
-                        <SelectContent class="bg-gray-700 text-white text-xs md:text-sm">
+                        <SelectContent class="bg-gray-700 text-white text-xs md:text-sm font-delius">
                             <SelectGroup>
                                 <SelectLabel>Priority</SelectLabel>
                                 <SelectItem v-for="prior of priority" :value="prior.value"
