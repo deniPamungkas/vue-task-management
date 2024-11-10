@@ -72,3 +72,19 @@ export const useTaskStore = defineStore("task", () => {
     doneTask,
   };
 });
+
+export const useTaskFilterStore = defineStore("taskFilter", () => {
+  const filter = ref(
+    JSON.parse(window.localStorage.getItem("taskFilter")) || "All tasks",
+  );
+
+  watch(filter, () => {
+    window.localStorage.setItem("taskFilter", JSON.stringify(filter.value));
+  });
+
+  const changeFilter = (taskFilter) => {
+    filter.value = taskFilter;
+  };
+
+  return { changeFilter, filter };
+});

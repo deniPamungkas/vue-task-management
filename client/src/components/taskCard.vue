@@ -9,6 +9,7 @@ import { useTaskStore } from '@/store/taskStore';
 import { watch } from 'vue';
 import { AlertDialog, AlertDialogTrigger } from './ui/alert-dialog';
 import CustomAlertDialog from './customAlertDialog.vue';
+import { useToast } from './ui/toast/use-toast';
 
 const props = defineProps({
     title: String,
@@ -16,7 +17,8 @@ const props = defineProps({
     subtask: Array,
     status: String,
     taskId: Number,
-    done: Boolean
+    done: Boolean,
+    priority: String
 
 })
 
@@ -26,16 +28,27 @@ const status = ref('')
 
 const isOpen = ref(false)
 
+const { toast } = useToast()
+
 watch(status, () => {
     taskStore.task.find(task => task.id == props.taskId).status = status.value
+    toast({
+        description: 'Task status has been changed to ' + status.value + ".",
+    })
 })
 
 const handleDeleteTask = () => {
     taskStore.deleteTask(props.taskId)
+    toast({
+        description: 'Task deleted.',
+    })
 }
 
 const handleDeleteSubTask = (subtaskId) => {
     taskStore.deleteSubTask(subtaskId, props.taskId)
+    toast({
+        description: 'Subtask deleted.',
+    })
 }
 
 const handleCheckSubTask = (subtaskId) => {
@@ -44,12 +57,16 @@ const handleCheckSubTask = (subtaskId) => {
 
 const handleDoneTask = () => {
     taskStore.doneTask(props.taskId)
+    console.log('first')
+    toast({
+        description: 'Your task has marked done.',
+    })
 }
 
 </script>
 <template>
     <div class="max-h-min break-inside-avoid p-3 rounded-lg border-gray-700 border-2 flex flex-col gap-3 transition-all duration-1000"
-        :class="props.done ? 'bg-green-400' : 'bg-gray-800'">
+        :class="props.priority == 'urgent' ? 'bg-red-950' : props.priority == 'medium' ? 'bg-yellow-950' : 'bg-blue-950'">
         <div class="w-full flex">
             <div class="w-full">
                 <h3 class="font-bold text-xs md:text-sm text-white">{{ props.title }}</h3>
@@ -129,7 +146,7 @@ const handleDoneTask = () => {
         </Collapsible>
         <Separator />
         <div class="w-full flex justify-between items-center">
-            <div class="h-[36px] bg-gradient-to-r px-4 rounded-full text-[10px] md:text-xs font-semibold text-white flex justify-between items-center gap-3"
+            <div class="h-[33px] bg-gradient-to-r px-3 rounded-lg border text-[10px] md:text-xs font-semibold text-white flex justify-between items-center gap-3"
                 :class="props.status == 'not started' ? 'from-slate-600 to-slate-500' : props.status == 'on progress' ? 'from-yellow-600 to-yellow-500' : 'from-green-600 to-green-500'">
                 <span>{{ props.status }}</span>
             </div>

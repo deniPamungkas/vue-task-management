@@ -8,13 +8,16 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrig
 import { Textarea } from './ui/textarea';
 import { priority } from '@/assets/constant';
 import { Separator } from './ui/separator';
-import { ref, watch } from 'vue';
+import { ref } from 'vue';
 import { useTaskStore } from '@/store/taskStore';
+import { useToast } from './ui/toast/use-toast';
 
 
 const taskStore = useTaskStore()
 
 const subTasks = ref([])
+
+const { toast } = useToast()
 
 const formData = {
     id: Date.now(),
@@ -45,6 +48,9 @@ const handleSubmit = async () => {
     formData.description = ''
     formData.subtask = ''
     subTasks.value = []
+    toast({
+        description: 'New Task Successfully added.',
+    })
 
 }
 

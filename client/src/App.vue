@@ -1,10 +1,9 @@
 <script setup>
-import { RouterView } from "vue-router";
-import { Button } from "./components/ui/button";
+import Home from "./pages/home.vue";
 </script>
 
 <template>
-  <RouterView />
+  <Home />
 </template>
 
 <style scoped></style>
