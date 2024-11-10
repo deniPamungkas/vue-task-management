@@ -13,7 +13,7 @@ const actionHandler = computed(() => {
 
 </script>
 <template>
-    <AlertDialogContent class="bg-gray-800 text-white">
+    <AlertDialogContent class="bg-gray-800 text-white font-delius">
         <AlertDialogHeader>
             <AlertDialogTitle v-if="props.handleDeleteTask">Are you absolutely sure to delete this task?
             </AlertDialogTitle>

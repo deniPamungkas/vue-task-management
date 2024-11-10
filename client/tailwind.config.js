@@ -15,6 +15,9 @@ module.exports = {
   ],
 
   theme: {
+    fontFamily: {
+      delius: ["Delius", "ui-sans-serif", "system-ui"],
+    },
     container: {
       center: true,
       padding: "2rem",

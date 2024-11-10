@@ -77,17 +77,17 @@ const handleDoneTask = () => {
                     <DropdownMenuTrigger as-child>
                         <Ellipsis />
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent class="w-56 bg-gray-800 text-white">
+                    <DropdownMenuContent class="w-56 bg-gray-800 text-white font-delius">
                         <DropdownMenuLabel>Options</DropdownMenuLabel>
                         <DropdownMenuSeparator />
                         <DropdownMenuGroup>
                             <DropdownMenuSub>
                                 <DropdownMenuSubTrigger
-                                    class="data-[highlighted]:bg-gray-700 data-[highlighted]:text-white data-[state=open]:bg-gray-700">
+                                    class="data-[highlighted]:bg-gray-700 data-[highlighted]:text-white data-[state=open]:bg-gray-700 font-delius">
                                     <span>Change task status</span>
                                 </DropdownMenuSubTrigger>
                                 <DropdownMenuPortal>
-                                    <DropdownMenuSubContent class="bg-gray-800 text-white">
+                                    <DropdownMenuSubContent class="bg-gray-800 text-white font-delius">
                                         <DropdownMenuItem @click="status = 'on progress'"
                                             class="data-[highlighted]:bg-gray-700 data-[highlighted]:text-white">
                                             <span>On Progress</span>
@@ -131,7 +131,7 @@ const handleDoneTask = () => {
             <CollapsibleContent class="space-y-2">
                 <div v-for="subtask of props.subtask"
                     class="rounded-md px-2 h-[50px] bg-gray-700 text-xs md:text-sm flex justify-between items-center">
-                    <span class="text-[9px] md:text-[11px]" :class="subtask.checked ? 'line-through' : ''">{{
+                    <span class="text-[9px] md:text-[11px]" :class="subtask.checked ? 'line-through italic' : ''">{{
                         subtask.value }}</span>
                     <div class="flex justify-center items-center gap-2">
                         <Button variant="ghost" class="p-0 hover:bg-gray-800" @click="handleCheckSubTask(subtask.id)">

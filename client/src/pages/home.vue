@@ -43,7 +43,7 @@ console.log(filter(taskFilterStore.filter))
 
 </script>
 <template>
-    <section class="p-3 grid grid-cols-1 md:grid-cols-4 gap-3 min-h-[100vh]">
+    <section class="p-3 grid grid-cols-1 md:grid-cols-4 gap-3 min-h-[100vh] font-delius">
         <Sidebar />
         <div class="flex flex-col gap-y-2 md:col-span-3">
             <nav class="h-[50px] bg-gray-700 rounded-lg flex justify-between items-center px-3">
@@ -78,14 +78,38 @@ console.log(filter(taskFilterStore.filter))
                     <InputTask />
                 </Dialog>
             </nav>
-            <div class="rounded-lg columns-1 md:columns-2 lg:columns-3 space-y-5 transition-all duration-1000">
+            <div v-if="taskStore.task.length != 0" class="rounded-lg transition-all duration-1000"
+                :class="taskStore.task.length != 0 && filteredTask.length == 0 && taskFilterStore.filter != 'All Tasks' ? 'h-full flex justify-center items-center' : 'columns-1 md:columns-2 lg:columns-3 space-y-5'">
                 <TaskCard v-if="filter(taskFilterStore.filter) == 'all'" v-for="task of taskStore.task"
                     :title="task.title" :description="task.description" :subtask="task.subtask" :status="task.status"
                     :task-id="task.id" :done="task.done" :priority="task.priority" />
 
-                <TaskCard v-else v-for="task of filteredTask" :title="task.title" :description="task.description"
-                    :subtask="task.subtask" :status="task.status" :task-id="task.id" :done="task.done"
-                    :priority="task.priority" />
+                <TaskCard v-else-if="filteredTask.length != 0" v-for="task of filteredTask" :title="task.title"
+                    :description="task.description" :subtask="task.subtask" :status="task.status" :task-id="task.id"
+                    :done="task.done" :priority="task.priority" />
+
+                <div v-else
+                    class="border-2 border-dashed rounded-md border-gray-700 flex flex-col space-y-3 justify-center items-center p-10">
+                    <p class="text-white text-xs md:text-sm">You dont have any {{ taskFilterStore.filter }}</p>
+                    <Dialog>
+                        <DialogTrigger as-child>
+                            <Button variant="secondary" class="text-xs md:text-sm">Create task</Button>
+                        </DialogTrigger>
+                        <InputTask />
+                    </Dialog>
+                </div>
+            </div>
+            <div v-else class="h-full flex justify-center items-center">
+                <div
+                    class="flex flex-col justify-center items-center space-y-3 border-2 border-dashed border-gray-700 p-10 rounded-md">
+                    <p class="text-white text-xs md:text-sm">You dont have any task. Create new task here</p>
+                    <Dialog>
+                        <DialogTrigger as-child>
+                            <Button variant="secondary" class="text-xs md:text-sm">Create task</Button>
+                        </DialogTrigger>
+                        <InputTask />
+                    </Dialog>
+                </div>
             </div>
         </div>
         <Toaster />

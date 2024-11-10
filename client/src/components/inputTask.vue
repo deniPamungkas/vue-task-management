@@ -56,7 +56,7 @@ const handleSubmit = async () => {
 
 </script>
 <template>
-    <DialogContent class="max-w-[300px] sm:max-w-[425px] md:max-w-[600px] bg-gray-800 text-white">
+    <DialogContent class="max-w-[300px] sm:max-w-[425px] md:max-w-[600px] bg-gray-800 text-white font-delius">
         <DialogHeader>
             <DialogTitle>New Task</DialogTitle>
             <DialogDescription class="text-slate-200 ">
