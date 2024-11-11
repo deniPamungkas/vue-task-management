@@ -62,7 +62,13 @@ export const useTaskStore = defineStore("task", () => {
     });
     doneTask[0].status = "completed";
     doneTask[0].done = true;
+    doneTask[0].completedAt = new Date()
+      .toJSON()
+      .slice(0, 10)
+      .replace(/-/g, "/");
+    console.log(doneTask[0]);
   };
+
   return {
     task,
     deleteTask,

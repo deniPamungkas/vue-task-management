@@ -18,7 +18,8 @@ const props = defineProps({
     status: String,
     taskId: Number,
     done: Boolean,
-    priority: String
+    priority: String,
+    completedAt: String
 
 })
 
@@ -66,7 +67,6 @@ const handleDoneTask = () => {
 <template>
     <div class="p-[2px] rounded-lg bg-gradient-to-br"
         :class="props.priority == 'urgent' ? 'from-red-500 to-red-900' : props.priority == 'medium' ? 'from-yellow-400 to-yellow-800' : 'from-blue-500 to-blue-900'">
-
         <div class=" max-h-min break-inside-avoid p-3 rounded-lg bg-gray-900 flex flex-col gap-3 transition-all duration-1000"
             :class="props.priority == 'urgent' ? 'border-red-900' : props.priority == 'medium' ? 'border-yellow-800' : 'border-blue-900'">
             <div class="w-full flex">
@@ -110,8 +110,8 @@ const handleDoneTask = () => {
                         </DropdownMenuContent>
                     </DropdownMenu>
                 </div>
-                <span v-if="props.done == true" class="text-white text-[10px]">Completed on {{ new
-                    Date().toJSON().slice(0, 10).replace(/-/g,'/') }}</span>
+                <span v-if="props.done == true" class="text-white text-[10px]">Completed on {{ props.completedAt
+                    }}</span>
             </div>
             <Separator v-if="props.subtask.length != 0" />
 

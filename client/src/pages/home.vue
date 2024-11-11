@@ -85,11 +85,11 @@ const filteredTask = computed(() =>
                 :class="taskStore.task.length != 0 && filteredTask.length == 0 && taskFilterStore.filter != 'All Tasks' ? 'h-full flex justify-center items-center' : 'columns-1 md:columns-2 lg:columns-3 space-y-5'">
                 <TaskCard v-if="filter(taskFilterStore.filter) == 'all'" v-for="task of taskStore.task"
                     :title="task.title" :description="task.description" :subtask="task.subtask" :status="task.status"
-                    :task-id="task.id" :done="task.done" :priority="task.priority" />
+                    :task-id="task.id" :done="task.done" :priority="task.priority" :completed-at="task.completedAt" />
 
                 <TaskCard v-else-if="filteredTask.length != 0" v-for="task of filteredTask" :title="task.title"
                     :description="task.description" :subtask="task.subtask" :status="task.status" :task-id="task.id"
-                    :done="task.done" :priority="task.priority" />
+                    :done="task.done" :priority="task.priority" :completed-at="task.completedAt" />
 
                 <div v-else
                     class="border-2 border-dashed rounded-md border-gray-700 flex flex-col space-y-3 justify-center items-center p-10">
