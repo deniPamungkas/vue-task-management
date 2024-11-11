@@ -14,7 +14,7 @@ const taskStore = useTaskStore()
 const taskFilterStore = useTaskFilterStore()
 
 const filter = (status) => {
-    let fil
+    let fil;
     switch (status) {
         case 'On Progress task':
             fil = 'on progress'
@@ -22,25 +22,28 @@ const filter = (status) => {
         case 'Not started task':
             fil = 'not started'
             break;
-        case 'Task done':
+        case 'Completed task':
             fil = 'completed'
             break;
         case 'All Tasks':
             fil = 'all'
             break;
-
+        case 'Task done':
+            fil = 'done'
         default:
             break;
     }
     return fil
 }
 
-const filteredTask = computed(() => taskStore.task.filter((task) => {
-    return task.status == filter(taskFilterStore.filter)
-}))
-
-console.log(filter(taskFilterStore.filter))
-
+const filteredTask = computed(() =>
+    taskStore.task.filter((task) => {
+        if (filter(taskFilterStore.filter) != 'done') {
+            return task.status == filter(taskFilterStore.filter) && task.done == false
+        } else {
+            return task.done == true
+        }
+    }))
 </script>
 <template>
     <section class="p-3 grid grid-cols-1 md:grid-cols-4 gap-3 min-h-[100vh] font-delius">
@@ -50,7 +53,7 @@ console.log(filter(taskFilterStore.filter))
                 <div class="block md:hidden">
                     <Select v-model="taskFilterStore.filter">
                         <SelectTrigger class="w-[100px] h-[30px] text-white bg-gray-600">
-                            <SelectValue :placeholder="taskFilterStore.filter" />
+                            <SelectValue placeholder="Filter" />
                         </SelectTrigger>
                         <SelectContent class="bg-gray-600 text-white">
                             <SelectItem value="All Tasks">

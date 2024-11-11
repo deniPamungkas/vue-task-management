@@ -57,7 +57,6 @@ const handleCheckSubTask = (subtaskId) => {
 
 const handleDoneTask = () => {
     taskStore.doneTask(props.taskId)
-    console.log('first')
     toast({
         description: 'Your task has marked done.',
     })
@@ -75,7 +74,8 @@ const handleDoneTask = () => {
                     <h3 class="font-bold text-sm md:text-base text-white">{{ props.title }}</h3>
                     <p class="text-xs md:text-sm text-slate-100">{{ props.description }}</p>
                 </div>
-                <div class="flex flex-col justify-start items-start text-white hover:bg-gray-900 h-[20px] rounded-sm">
+                <div v-if="props.done == false"
+                    class="flex flex-col justify-start items-start text-white hover:bg-gray-900 h-[20px] rounded-sm">
                     <DropdownMenu>
                         <DropdownMenuTrigger as-child>
                             <Ellipsis />
@@ -110,6 +110,8 @@ const handleDoneTask = () => {
                         </DropdownMenuContent>
                     </DropdownMenu>
                 </div>
+                <span v-if="props.done == true" class="text-white text-[10px]">Completed on {{ new
+                    Date().toJSON().slice(0, 10).replace(/-/g,'/') }}</span>
             </div>
             <Separator v-if="props.subtask.length != 0" />
 
@@ -163,15 +165,20 @@ const handleDoneTask = () => {
                         <CustomAlertDialog :handle-delete-task="handleDeleteTask" />
                     </AlertDialog>
                 </div>
-                <AlertDialog>
-                    <AlertDialogTrigger as-child>
-                        <Button variant="ghost"
-                            class="h-full w-[30px] flex justify-center items-center hover:bg-gray-900 rounded-full">
-                            <Check class="text-green-600" size="20px" />
-                        </Button>
-                    </AlertDialogTrigger>
-                    <CustomAlertDialog :handle-done-task="handleDoneTask" />
-                </AlertDialog>
+                <div v-if="props.done == false">
+                    <AlertDialog>
+                        <AlertDialogTrigger as-child>
+                            <Button variant="ghost"
+                                class="h-full w-[30px] flex justify-center items-center hover:bg-gray-900 rounded-full">
+                                <Check class="text-green-600" size="20px" />
+                            </Button>
+                        </AlertDialogTrigger>
+                        <CustomAlertDialog :handle-done-task="handleDoneTask" />
+                    </AlertDialog>
+                </div>
+                <div v-if="props.done == true">
+                    <span class="text-white text-sm">Marked Done!</span>
+                </div>
             </div>
         </div>
     </div>

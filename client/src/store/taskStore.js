@@ -60,6 +60,7 @@ export const useTaskStore = defineStore("task", () => {
     const doneTask = task.value.filter((task) => {
       return task.id == taskId;
     });
+    doneTask[0].status = "completed";
     doneTask[0].done = true;
   };
   return {
