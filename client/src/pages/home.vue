@@ -65,6 +65,9 @@ const filteredTask = computed(() =>
                             <SelectItem value="Not started task">
                                 Not started task
                             </SelectItem>
+                            <SelectItem value="Completed task">
+                                Completed task
+                            </SelectItem>
                             <SelectItem value="Task done">
                                 Task done
                             </SelectItem>
