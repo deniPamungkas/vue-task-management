@@ -24,15 +24,27 @@ const changeFilter = (e) => {
         </div>
         <div class="flex flex-col gap-y-3 text-white text-xs">
             <div class="flex gap-x-2 items-center justify-start">
-                <div class="w-[15px] h-[15px] border bg-red-950"></div>
+                <div class="p-[2px] rounded-[2px] bg-gradient-to-br from-red-500 to-red-900">
+                    <div class="w-[13px] h-[13px] bg-gray-900 rounded-[2px]">
+
+                    </div>
+                </div>
                 <p>Priority urgent</p>
             </div>
             <div class="flex gap-x-2 items-center justify-start">
-                <div class="w-[15px] h-[15px] border bg-yellow-950"></div>
+                <div class="p-[2px] rounded-[2px] bg-gradient-to-br from-yellow-400 to-yellow-800">
+                    <div class="w-[13px] h-[13px] bg-gray-900 rounded-[2px]">
+
+                    </div>
+                </div>
                 <p>Priority medium</p>
             </div>
             <div class="flex gap-x-2 items-center justify-start">
-                <div class="w-[15px] h-[15px] border bg-blue-950"></div>
+                <div class="p-[2px] rounded-[2px] bg-gradient-to-br from-blue-500 to-blue-900">
+                    <div class="w-[13px] h-[13px] bg-gray-900 rounded-[2px]">
+
+                    </div>
+                </div>
                 <p>Priority later</p>
             </div>
         </div>
